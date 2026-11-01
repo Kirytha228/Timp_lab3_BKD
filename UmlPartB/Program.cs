@@ -1,0 +1,16 @@
+var person = new Operator("Анна");
+var group1 = new Crew();
+var group2 = new Crew();
+group1.Add(person);
+group1.Add(person);
+group2.Add(person);
+var first = new BackupLog();
+var second = new BackupLog();
+first.Add(person, 2);
+first.Add(person, 7);
+Console.WriteLine($"Участник: {person.Name}");
+Console.WriteLine($"Первый журнал: {first.Result()}");
+Console.WriteLine($"Второй журнал: {second.Result()}");
+second.Add(person, 5);
+Console.WriteLine($"После добавления: {second.Result()}");
+Console.WriteLine($"Первый без изменений: {first.Result()}");

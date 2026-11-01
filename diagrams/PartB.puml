@@ -1,0 +1,44 @@
+@startuml PartB
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam monochrome true
+skinparam dpi 200
+skinparam backgroundColor white
+skinparam classBackgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam nodesep 140
+skinparam ranksep 100
+hide circle
+
+class Crew {
+  - members: List<Operator>
+  --
+  + Add(p: Operator): void
+}
+
+class Operator {
+  + Name: string {readOnly}
+  --
+  + Operator(name: string)
+}
+
+class BackupLog {
+  - records: List<CopyRecord>
+  --
+  + Add(p: Operator, value: int): void
+  + Result(): int
+}
+
+class CopyRecord {
+  + Person: Operator {readOnly}
+  + Value: int {readOnly}
+  --
+  + CopyRecord(p: Operator, value: int)
+}
+
+Crew "0..*" o-right-> "members\n0..*" Operator
+BackupLog "1" *-right-> "records\n0..*" CopyRecord
+CopyRecord "0..*" -up-> "Person\n1" Operator
+@enduml

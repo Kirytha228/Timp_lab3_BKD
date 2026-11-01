@@ -1,0 +1,42 @@
+@startuml PartA
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam monochrome true
+skinparam dpi 200
+skinparam backgroundColor white
+skinparam classBackgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam nodesep 80
+skinparam ranksep 90
+hide circle
+hide empty methods
+
+abstract class "BackupPlan {abstract}" as BackupPlan {
+  + Name: string {readOnly}
+  --
+  # BackupPlan(name: string)
+}
+
+interface "<plain>«interface» IValue</plain>" as IValue {
+  --
+  + GetValue(): int
+}
+
+class CopyPlan {
+  + Files: int {readOnly}
+  + SizeMb: int {readOnly}
+  --
+  + GetValue(): int
+}
+
+class Calculator {
+  --
+  + Total(items: IValue[]): int
+}
+
+BackupPlan <|-- CopyPlan
+IValue <|.. CopyPlan
+IValue <.. Calculator
+@enduml
